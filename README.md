@@ -42,4 +42,37 @@ Please provide numeric phone number instead of a string
 >>> 
 ```
 
-You can find much more usage examples in `test.py` file.
+##More complex example
+```python
+from legaliser import legalise, Many, Optional
+
+data = {'status': 'WARMING UP',
+        'temperatures': {'pcb1': 60, 'pcb2': 42.7},
+        'queued measurements': [12353, 65463, 76346, 34542, 34544, 87547]}
+legalise(json_object=data,
+         schema={'status': str,
+                 'temperatures': (dict, Optional),
+                 'queued measurements': [Many(int)]})
+```
+
+The structure above will also accept such input data, as field `temperatures` is optional:
+```python
+data = {'status': 'WARMING UP',
+        'queued measurements': [12353, 65463, 76346, 34542, 34544, 87547]}
+```
+
+You can write custom methods for data validation: 
+```python
+
+from legaliser import legalise
+
+data = {'queued measurements': [12353, 65463, 76346, 34542, 34544, 87547]}
+def validate_measurement(values):
+    for val in values:
+        if not 1000 < val < 99999:
+            return False
+    return True
+
+legalise(json_object=data,
+         schema={'queued measurements': (list, validate_measurement)})
+```
