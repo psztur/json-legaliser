@@ -15,6 +15,8 @@ class TestBase(unittest.TestCase):
         else:
             self.assertTrue(False, 'This should have raised {} with {}'.format(exception, msg))
 
+
+class BasicTests(TestBase):
     def test_basics(self):
         legalise({})
         legalise({}, dict)
