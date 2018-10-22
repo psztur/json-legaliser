@@ -3,7 +3,7 @@
 Python util designed for assessing json object structure. 
 
 
-##Examples
+## Examples
 In order to ensure your json object consist only of key `person` with a value of string
 and key `phone` with numeric value: 
 ```python
@@ -42,7 +42,7 @@ Please provide numeric phone number instead of a string
 >>> 
 ```
 
-##More complex example
+## More complex example
 ```python
 from legaliser import legalise, Many, Optional
 
